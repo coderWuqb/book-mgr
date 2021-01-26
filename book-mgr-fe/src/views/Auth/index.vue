@@ -13,17 +13,17 @@
         <a-tab-pane key="1" tab="登录"> 
             <!-- Ant Design 输入框 -->
             <div class="item">
-                <a-input placeholder="账户" size="large" />
+                <a-input placeholder="账户" size="large" v-model:value="loginForm.account"/>
             </div>
             <div class="item">
-                <a-input placeholder="密码" size="large" />
+                <a-input placeholder="密码" size="large" v-model:value="loginForm.password"/>
             </div>
             <div class="item">
                 <a href="">忘记密码</a>
             </div>
             <!-- Ant Design 按钮 -->
             <div class="item">
-                <a-button type="primary" size="large" >登录</a-button>
+                <a-button type="primary" size="large" @click="login" >登录</a-button>
             </div>
         </a-tab-pane>
         <a-tab-pane key="2" tab="注册">

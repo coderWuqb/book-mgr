@@ -1,4 +1,5 @@
 const Router = require('@koa/router');
+var jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 // 获取注册过的model
@@ -42,7 +43,48 @@ router.post('/register', async (ctx) => {
 });
 
 router.post('/login', async (ctx) => {
-    ctx.body = '登录成功';
+    // 拿取客户端传过来的数据
+    const { account, password } = ctx.request.body;
+
+    // 在数据库中查询该账户并返回该文档
+    const one = await User.findOne({
+        account,
+    }).exec();
+
+    // 未查询到该账户
+    if(!one){
+        ctx.response.body = {
+            code: 0,
+            msg: '用户名或密码错误',
+            data: null,
+        }
+        return;
+    }
+
+    const user = {
+        account: one.account,
+        _id: one.id,
+    }
+
+    // 密码正确
+    if(one.password === password){
+        ctx.response.body = {
+            code: 1,
+            msg: '登入成功',
+            data: {
+                user,
+                token: jwt.sign(user, 'book-mgr'),
+            }
+        }
+        return;
+    }
+
+    // 密码错误
+    ctx.response.body = {
+        code: 0,
+        msg: '用户名或密码错误',
+        data: null,
+    }
 });
 
 module.exports = router;
