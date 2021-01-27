@@ -34,9 +34,6 @@
                 <a-input placeholder="密码" size="large" v-model:value="regForm.password" />
             </div>
             <div class="item">
-                <a-input placeholder="邀请码" size="large"/>
-            </div>
-            <div class="item">
                 <a-button type="primary" size="large" @click="register">注册</a-button>
             </div>
         </a-tab-pane>
