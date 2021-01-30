@@ -33,8 +33,10 @@ router.post('/register', async (ctx) => {
         password,
     });
 
+    // 将添加的数据保存到数据库并返回添加的内容
     const res = await user.save();
-    // 返回的是一个json
+
+    // 返回相关信息给客户端
     ctx.response.body = {
         code: 1,
         msg: '注册成功',

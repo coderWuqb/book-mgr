@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-require('./Schemas/User');
+require('./Schemas/User.js');
+require('./Schemas/book.js');
 
 const connect = () => {
     return new Promise((resolve) => {
